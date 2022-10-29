@@ -1,0 +1,61 @@
+#include<stdio.h>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+#include<stdlib.h>
+
+int *divide(int *, int, int);
+int *merge(int *, int, int ,int);
+int j;
+
+main()
+{
+	//system("clear");
+	int *A, i;
+	printf("\nENTER TOTAL NUMBER OF ELEMENTS TO BE INSERTED\n");
+	scanf("%d", &j);
+	A=(int *) malloc (j*sizeof(int));
+	printf("\nENTER THE ELEMENTS\n");
+	for(i=0;i<j;i++)
+		scanf("%d", &A[i]);
+	A=divide(A,0,j-1);
+	printf("\nTHE SORTED ARRAY USING MERGE SORT=\n");
+	for(i=0;i<j;i++)
+		printf("%d\t",A[i]);
+	printf("\n");
+}
+
+
+int *divide(int *B, int LB, int UB)
+{
+	int mid;
+	if(LB != UB)
+	{
+		mid=(LB+UB)/2;
+		divide(B,LB,mid);
+		divide(B,mid+1,UB);
+		B=merge(B,LB,mid,UB);
+	}
+	return B;
+}
+
+int *merge(int *array, int low, int mid, int high)
+{
+    	int temp[j];
+	int i=low;
+    	int j=mid +1;
+   	int k=low;
+
+    	while((i<=mid) && (j<=high))
+    	{
+        		if(array[i] <= array[j])
+            			temp[k++]=array[i++];
+        		else
+            			temp[k++]=array[j++];
+    	}
+    	while(i <= mid)
+        		temp[k++]=array[i++];
+    	while(j <= high)
+        		temp[k++]=array[j++];
+
+    	for(i= low;i <= high;i++)
+        		array[i]=temp[i];
+	return array;
+}	
